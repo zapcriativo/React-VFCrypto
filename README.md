@@ -14,7 +14,8 @@ Demo: [https://vfcryptoalan.herokuapp.com](https://vfcryptoalan.herokuapp.com)
 ## Install Libs
 `yarn`
 
-### `yarn start`
+## Run project local
+`yarn start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
