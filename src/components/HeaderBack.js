@@ -10,8 +10,6 @@ const HeaderBack = (props) => {
     const { Id, FullName, Internal, ImageUrl } = props.cripto.CoinInfo;
     const { PRICE } = extractDISPLAY(props.cripto);
 
-    console.log(props)
-
     return (
         <Container>
             <BackButton onClick={() => history.push(`/`)}>

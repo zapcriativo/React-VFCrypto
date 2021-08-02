@@ -23,7 +23,6 @@ const CoinsList = (props) => {
     }, [])
 
     const loadCoinsSaga = () => {
-        console.log('chama o interval')
         props.setIsLoadingCoins()
         props.loadCoins('USD')
     }
