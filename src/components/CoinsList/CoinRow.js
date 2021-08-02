@@ -2,21 +2,29 @@ import extractDISPLAY from '../../util/extractDISPLAY'
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function CoinRow({ coin }) {
     const history = useHistory();
     const { PRICE, MKTCAP, CHANGEPCT24HOUR } = extractDISPLAY(coin);
     const { Id, FullName, ImageUrl } = coin.CoinInfo;
 
+
     return (
-        <DivRowParent onClick={() => history.push(`/details/${Id}`)}>
+        <DivRowParent onClick={() => history.push({
+            pathname: `/details/${Id}`,
+            state: { id: Id }
+        })}>
             <DivTableRow>
-                <DivTableCell>
+                <BTCName>
+                    <span>{coin.rank}</span>
                     <img src={`https://www.cryptocompare.com${ImageUrl}`} />
                     {FullName}
-                </DivTableCell>
+                </BTCName>
                 <DivPrice>{PRICE}</DivPrice>
                 <DivMKTCAP>{MKTCAP}</DivMKTCAP>
-                <DivCHANGEPCT24HOUR>{CHANGEPCT24HOUR}</DivCHANGEPCT24HOUR>
+                <DivCHANGEPCT24HOUR>{CHANGEPCT24HOUR} <FontAwesomeIcon icon={faArrowUp} /></DivCHANGEPCT24HOUR>
             </DivTableRow>
         </DivRowParent>
     );
@@ -40,7 +48,12 @@ const DivTableRow = styled.div`
     margin: 0 auto;
 `
 
-const DivTableCell = styled.div`
+const BTCName = styled.div`
+    span {
+        color: #a8a8a8;
+        margin-right: 10px;
+        font-size: 12px;
+    }
     display: table-cell;
     vertical-align: middle;
     width: 16%;
@@ -82,6 +95,10 @@ const DivCHANGEPCT24HOUR = styled.div`
     font-weight: 600;
     font-size: 12px;
     text-align: right;
+`
+const Rank = styled.p`
+    margin-right: 10px;
+    font-size: 10px;
 `
 
 export default CoinRow;

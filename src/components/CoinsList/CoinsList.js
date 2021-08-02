@@ -41,18 +41,19 @@ const CoinsList = (props) => {
                         {Columns.map(column => (<DivTableCell onClick={() => sortOrder(column.id)} >{column.name}</DivTableCell>))}
                     </DivTableRow>
                 </DivRowParent>
-                {props.coins.map((coin, key) => <CoinRow key={key} coin={coin} />)}
+                {OrderElements(props.orderColum, props.orderBy, props.coins).map((coin, key) => <CoinRow key={key} coin={coin} />)}
             </DivTable>
             : "nada"
     )
-}
 
+
+}
 
 const mapStateToProps = state => ({
     currency: state.coins.currency,
     orderColum: state.coins.orderColum,
     orderBy: state.coins.orderBy,
-    coins: OrderElements(state.coins.orderColum, state.coins.orderBy, state.coins.coins.Data),
+    coins: state.coins.coins,
     isLoading: state.coins.isLoading
 })
 

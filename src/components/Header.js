@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
-
 import { setIsLoadingCoins, loadCoins } from '../redux/core/actions/actions'
 import currencies from '../util/currencies'
-
 import { useLocation } from 'react-router-dom'
 
+import  HeaderBack from './HeaderBack'
+
 const Header = (props) => {
+
     const location = useLocation();
-    console.log(location.pathname);
 
     const changeCurrency = (value) => {
         props.setIsLoadingCoins()
@@ -23,9 +23,7 @@ const Header = (props) => {
                 {location.pathname == '/' ? (
                     <LogoHome>VFCrypto</LogoHome>
                 ) : (
-                    <div>
-                        Interna - {props.orderColum}
-                    </div>
+                    <HeaderBack cripto={props.coins.find(item => item.CoinInfo.Id == location.state.id)} />
                 )}
 
                 <RightBox>
@@ -38,6 +36,8 @@ const Header = (props) => {
     );
 }
 
+
+
 const BoxContainer = styled.div`  
     display: flex;
     flexDirection: 'row';
@@ -45,7 +45,7 @@ const BoxContainer = styled.div`
 `
 
 const HeaderContent = styled.div`
-    width: 80%;
+    width: 90%;
     display: flex;
     flexDirection: 'row';
     justify-content: space-between;
@@ -62,6 +62,7 @@ const LogoHome = styled.div`
 `
 
 const mapStateToProps = state => ({
+    coins: state.coins.coins,
     currency: state.coins.currency,
     orderColum: state.coins.orderColum
 })
