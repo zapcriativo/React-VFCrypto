@@ -13,4 +13,3 @@ export const setOrder = (value) => ({
     type: types.SET_ORDER,
     orderData: value,
 })
-

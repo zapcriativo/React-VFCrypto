@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { setIsLoadingCoins, loadCoins, setOrder } from '../../redux/core/actions/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
+import { faChevronCircleDown, faChevronCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { createSelector } from 'reselect'
+
 import CoinRow from './CoinRow'
 import CoinRowLoading from './CoinRowLoading'
 import Columns from './Columns'
@@ -10,9 +14,19 @@ import OrderElements from './orderElements'
 
 const CoinsList = (props) => {
     useEffect(() => {
+        let SagaInterval
+
+        // DEBOUNCE 
+        loadCoinsSaga()
+        clearInterval(SagaInterval)
+        SagaInterval = setInterval(() => loadCoinsSaga(), 60000)
+    }, [])
+
+    const loadCoinsSaga = () => {
+        console.log('chama o interval')
         props.setIsLoadingCoins()
         props.loadCoins('USD')
-    }, [])
+    }
 
 
     // DISPATCH NEW SORT ORDER COLUMN
@@ -38,22 +52,32 @@ const CoinsList = (props) => {
             <DivTable>
                 <DivRowParent>
                     <DivTableRow>
-                        {Columns.map(column => (<DivTableCell onClick={() => sortOrder(column.id)} >{column.name}</DivTableCell>))}
+                        {Columns.map(column => (<DivTableCell onClick={() => sortOrder(column.id)} >
+                            {props.orderColum == column.id ? (props.orderBy == 'ASC' ? <FontAwesomeIcon icon={faChevronCircleUp} /> : <FontAwesomeIcon icon={faChevronCircleDown} />) : ''}  {column.name}
+                        </DivTableCell>))}
                     </DivTableRow>
                 </DivRowParent>
                 {OrderElements(props.orderColum, props.orderBy, props.coins).map((coin, key) => <CoinRow key={key} coin={coin} />)}
             </DivTable>
             : "nada"
     )
-
-
 }
+
+
+// RESELECT FOR COINS LIST
+const coinsSelectorFunction = createSelector(
+    state => state.coins.coins,
+    (coins) => {
+        return coins
+    }
+)
+
 
 const mapStateToProps = state => ({
     currency: state.coins.currency,
     orderColum: state.coins.orderColum,
     orderBy: state.coins.orderBy,
-    coins: state.coins.coins,
+    coins: coinsSelectorFunction(state),
     isLoading: state.coins.isLoading
 })
 

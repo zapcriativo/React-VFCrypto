@@ -1,7 +1,7 @@
 import types from '../actions/types'
 
 const STATE = {
-    coins: null,
+    coins: {},
     isLoading: true,
     currency: 'USD',
     orderColum: 'crypto',
@@ -9,10 +9,6 @@ const STATE = {
 }
 
 export default (state = STATE, action) => {
-
-    console.log('state chagendo do coins')
-    console.log(state)
-
     switch (action.type) {
         case types.SET_COINS:
             return { coins: action.payload, isLoading: false, }

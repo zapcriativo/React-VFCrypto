@@ -1,18 +1,23 @@
+import React, { useState } from 'react';
 import styled from "styled-components";
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
 import { setIsLoadingCoins, loadCoins } from '../redux/core/actions/actions'
 import currencies from '../util/currencies'
 import { useLocation } from 'react-router-dom'
 
-import  HeaderBack from './HeaderBack'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import HeaderBack from './HeaderBack'
 
 const Header = (props) => {
 
     const location = useLocation();
+    const [CurrencyState, setCurrencyState] = useState(props.currency)
 
     const changeCurrency = (value) => {
+        setCurrencyState(value)
         props.setIsLoadingCoins()
         props.loadCoins(value)
     }
@@ -27,9 +32,9 @@ const Header = (props) => {
                 )}
 
                 <RightBox>
-                    <select value={props.currency} onChange={(e) => changeCurrency(e.target.value)}>
-                        {currencies.map((curr, i) => <option key={i} value={curr}>{curr}</option>)}
-                    </select>
+                    <Select value={CurrencyState} onChange={(e) => changeCurrency(e.target.value)}> 
+                        {currencies.map((curr, i) => <MenuItem key={i} value={curr}>{curr}</MenuItem>)}
+                    </Select>
                 </RightBox>
             </HeaderContent>
         </BoxContainer>
@@ -54,6 +59,8 @@ const HeaderContent = styled.div`
 
 const RightBox = styled.div`
     align-items: flex-end;
+    align-self: center;
+
 `
 
 const LogoHome = styled.div`
