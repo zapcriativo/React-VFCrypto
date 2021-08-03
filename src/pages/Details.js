@@ -81,7 +81,7 @@ const Rank = styled.div`
 
 
 const mapStateToProps = (state, props) => ({
-    coin: state.coins.coins.find(item => item.CoinInfo.Id == props.match.params.id),
+    coin: state.coins.coins.find(item => item.CoinInfo.Id === props.match.params.id),
     isLoading: state.coins.isLoading
 })
 

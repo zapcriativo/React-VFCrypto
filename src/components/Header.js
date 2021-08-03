@@ -25,10 +25,10 @@ const Header = (props) => {
     return (
         <BoxContainer>
             <HeaderContent>
-                {location.pathname == '/' ? (
+                {location.pathname === '/' ? (
                     <LogoHome>VFCrypto</LogoHome>
                 ) : (
-                    <HeaderBack cripto={props.coins.find(item => item.CoinInfo.Id == location.state.id)} />
+                    <HeaderBack cripto={props.coins.find(item => item.CoinInfo.Id === location.state.id)} />
                 )}
 
                 <RightBox>

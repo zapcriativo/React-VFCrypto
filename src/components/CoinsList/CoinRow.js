@@ -19,7 +19,7 @@ function CoinRow({ coin }) {
             <DivTableRow>
                 <BTCName>
                     <span>{coin.rank}</span>
-                    <img src={`https://www.cryptocompare.com${ImageUrl}`} />
+                    <img src={`https://www.cryptocompare.com${ImageUrl}`} alt={FullName}/>
                     {FullName}
                 </BTCName>
                 <DivPrice>{PRICE}</DivPrice>
@@ -95,10 +95,6 @@ const DivCHANGEPCT24HOUR = styled.div`
     font-weight: 600;
     font-size: 12px;
     text-align: right;
-`
-const Rank = styled.p`
-    margin-right: 10px;
-    font-size: 10px;
 `
 
 export default CoinRow;

@@ -30,10 +30,10 @@ const CoinsList = (props) => {
 
     // DISPATCH NEW SORT ORDER COLUMN
     const sortOrder = (value) => {
-        if (value != props.orderColum) {
+        if (value !== props.orderColum) {
             props.setOrder({ orderColumn: value, orderBy: 'ASC' })
         } else {
-            props.setOrder({ orderColumn: value, orderBy: props.orderBy == 'ASC' ? 'DESC' : 'ASC' })
+            props.setOrder({ orderColumn: value, orderBy: props.orderBy === 'ASC' ? 'DESC' : 'ASC' })
         }
     }
 
@@ -52,7 +52,7 @@ const CoinsList = (props) => {
                 <DivRowParent>
                     <DivTableRow>
                         {Columns.map(column => (<DivTableCell onClick={() => sortOrder(column.id)} >
-                            {props.orderColum == column.id ? (props.orderBy == 'ASC' ? <FontAwesomeIcon icon={faChevronCircleUp} /> : <FontAwesomeIcon icon={faChevronCircleDown} />) : ''}  {column.name}
+                            {props.orderColum === column.id ? (props.orderBy === 'ASC' ? <FontAwesomeIcon icon={faChevronCircleUp} /> : <FontAwesomeIcon icon={faChevronCircleDown} />) : ''}  {column.name}
                         </DivTableCell>))}
                     </DivTableRow>
                 </DivRowParent>

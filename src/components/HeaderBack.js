@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HeaderBack = (props) => {
     const history = useHistory();
-    const { Id, FullName, Internal, ImageUrl } = props.cripto.CoinInfo;
+    const { FullName, Internal, ImageUrl } = props.cripto.CoinInfo;
     const { PRICE } = extractDISPLAY(props.cripto);
 
     return (
@@ -15,7 +15,7 @@ const HeaderBack = (props) => {
             <BackButton onClick={() => history.push(`/`)}>
                 <FontAwesomeIcon icon={faArrowLeft} />
             </BackButton>
-            <img src={`https://www.cryptocompare.com${ImageUrl}`} />
+            <img src={`https://www.cryptocompare.com${ImageUrl}`} alt={FullName}/>
             <CryptoName>
                 {FullName}
                 <p>

@@ -15,13 +15,13 @@ export const getKey = (obj) => {
 const OrderElements = (sortColumn, orderBy, data) => {
   switch (sortColumn) {
     case "crypto":
-      return orderBy == 'ASC' ? data.sort(nameSort) : data.sort(nameSort).reverse();
+      return orderBy === 'ASC' ? data.sort(nameSort) : data.sort(nameSort).reverse();
     case "price":
-      return orderBy == 'ASC' ? data.sort(priceSort) : data.sort(priceSort).reverse();
+      return orderBy === 'ASC' ? data.sort(priceSort) : data.sort(priceSort).reverse();
     case "marketCap":
-      return orderBy == 'ASC' ? data.sort(marketCapSort) : data.sort(marketCapSort).reverse();
+      return orderBy === 'ASC' ? data.sort(marketCapSort) : data.sort(marketCapSort).reverse();
     case "24h":
-      return orderBy == 'ASC' ? data.sort(hourSort) : data.sort(hourSort).reverse();
+      return orderBy === 'ASC' ? data.sort(hourSort) : data.sort(hourSort).reverse();
     default:
       return data;
   }
