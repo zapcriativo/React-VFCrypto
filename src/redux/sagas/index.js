@@ -1,6 +1,6 @@
 import { coinApi } from '../../services/api'
 import types from '../core/actions/types'
-import { put, call, takeLatest, all, delay } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 function* loadCoinsSaga(action) {
     let jsonResponse = yield call(coinApi, action.payload)
