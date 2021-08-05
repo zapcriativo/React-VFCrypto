@@ -12,7 +12,7 @@ const STATE = {
 export default (state = STATE, action) => {
     switch (action.type) {
         case types.SET_COINS:
-            return { coins: action.payload, isLoading: false, }
+            return { ...state, coins: action.payload, isLoading: false, }
         case types.IS_LOADING:
             return { ...state, isLoading: true }
         case types.SET_ORDER:

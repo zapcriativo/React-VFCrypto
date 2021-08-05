@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from "styled-components";
 import { setIsLoadingCoins, loadCoins, setOrder } from '../../redux/core/actions/actions'
 import { connect } from 'react-redux'
@@ -14,25 +14,6 @@ import Columns from './Columns'
 import OrderElements from './orderElements'
 
 const CoinsList = (props) => {
-
-    useEffect(() => {
-
-        const loadCoinsSaga = () => {
-            props.setIsLoadingCoins()
-            props.loadCoins('USD')
-        }
-
-        let SagaInterval
-        // DEBOUNCE 
-        loadCoinsSaga()
-        clearInterval(SagaInterval)
-        SagaInterval = setInterval(() => loadCoinsSaga(), 60000)
-        return function cleanup() {
-            clearInterval(SagaInterval)
-        };
-    }, [])
-
-
 
     // DISPATCH NEW SORT ORDER COLUMN
     const sortOrder = (value) => {
@@ -76,7 +57,6 @@ const coinsSelectorFunction = createSelector(
         return coins
     }
 )
-
 
 const mapStateToProps = state => ({
     currency: state.coins.currency,
@@ -136,6 +116,9 @@ const DivTableCell = styled.div`
     font-weight: 600;
     width: 20%;
     color: #a1b3c2;
+    &:hover {
+        color: #7f93a3
+    }
 `
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinsList)
