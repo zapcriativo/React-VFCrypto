@@ -2,7 +2,7 @@ import extractDISPLAY from '../../util/extractDISPLAY'
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function CoinRow({ coin }) {
@@ -24,7 +24,11 @@ function CoinRow({ coin }) {
                 </BTCName>
                 <DivPrice>{PRICE}</DivPrice>
                 <DivMKTCAP>{MKTCAP}</DivMKTCAP>
-                <DivCHANGEPCT24HOUR>{CHANGEPCT24HOUR} <FontAwesomeIcon icon={faArrowUp} /></DivCHANGEPCT24HOUR>
+                {CHANGEPCT24HOUR >= 0 ? (
+                    <DivCHANGEPCT24HOURup>{CHANGEPCT24HOUR} <FontAwesomeIcon icon={faArrowUp} /></DivCHANGEPCT24HOURup>
+                ) : (
+                    <DivCHANGEPCT24HOURdown>{CHANGEPCT24HOUR} <FontAwesomeIcon icon={faArrowDown} /></DivCHANGEPCT24HOURdown>
+                )}
             </DivTableRow>
         </DivRowParent>
     );
@@ -87,11 +91,21 @@ const DivMKTCAP = styled.div`
     }
 `
 
-const DivCHANGEPCT24HOUR = styled.div`
+const DivCHANGEPCT24HOURup = styled.div`
     display: table-cell;
     vertical-align: middle;
     width: 8%;
     color: #5abf2e;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: right;
+`
+
+const DivCHANGEPCT24HOURdown = styled.div`
+    display: table-cell;
+    vertical-align: middle;
+    width: 8%;
+    color: red;
     font-weight: 600;
     font-size: 12px;
     text-align: right;
