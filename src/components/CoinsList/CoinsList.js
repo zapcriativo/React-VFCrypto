@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { setIsLoadingCoins, loadCoins, setOrder } from '../../redux/core/actions/actions'
@@ -13,19 +14,24 @@ import Columns from './Columns'
 import OrderElements from './orderElements'
 
 const CoinsList = (props) => {
-    useEffect(() => {
-        let SagaInterval
 
+    useEffect(() => {
+
+        const loadCoinsSaga = () => {
+            props.setIsLoadingCoins()
+            props.loadCoins('USD')
+        }
+
+        let SagaInterval
         // DEBOUNCE 
         loadCoinsSaga()
         clearInterval(SagaInterval)
         SagaInterval = setInterval(() => loadCoinsSaga(), 60000)
+        return function cleanup() {
+            clearInterval(SagaInterval)
+        };
     }, [])
 
-    const loadCoinsSaga = () => {
-        props.setIsLoadingCoins()
-        props.loadCoins('USD')
-    }
 
 
     // DISPATCH NEW SORT ORDER COLUMN
