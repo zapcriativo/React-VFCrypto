@@ -5,7 +5,7 @@ const STATE = {
     coins: {},
     isLoading: true,
     currency: 'USD',
-    orderColum: 'crypto',
+    // orderColum: 'crypto',
     orderBy: 'ASC'
 }
 

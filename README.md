@@ -2,7 +2,7 @@
 
 VFCrypt project created by Alan to The Virtual Forge Code Challenge
 
-Demo: [https://vfcryptoalan.herokuapp.com](https://vfcryptoalan.herokuapp.com)
+Demo: [https://vfc-rypto.vercel.app](https://vfc-rypto.vercel.app)
 
 ## Libs Used
 
